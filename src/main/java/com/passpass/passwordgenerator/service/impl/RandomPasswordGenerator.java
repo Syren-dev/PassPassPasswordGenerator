@@ -3,7 +3,7 @@ package com.passpass.passwordgenerator.service.impl;
 
 import com.passpass.passwordgenerator.dto.impl.RandomPasswordRequest;
 import com.passpass.passwordgenerator.service.PasswordGenerator;
-import com.passpass.passwordgenerator.utils.constants.PasswordConstants;
+import com.passpass.passwordgenerator.utils.constants.CommonConstants;
 import org.springframework.stereotype.Component;
 
 import java.security.SecureRandom;
@@ -29,20 +29,16 @@ public class RandomPasswordGenerator implements PasswordGenerator<RandomPassword
 
         validateRequest(request);
 
-        int selectedTypes = 0;
         int length = request.getLength();
 
         StringBuilder pool =  new StringBuilder();
         StringBuilder password = new StringBuilder(length);
 
-        handleType(request.isIncludeLowerCase(), PasswordConstants.LOWERCASE,pool,password);
-        handleType(request.isIncludeUpperCase(), PasswordConstants.UPPERCASE,pool,password);
-        handleType(request.isIncludeNumbers(), PasswordConstants.NUMBERS,pool,password);
-        handleType(request.isIncludeSymbols(), PasswordConstants.SYMBOLS,pool,password);
+        handleType(request.isIncludeLowerCase(), CommonConstants.LOWERCASE,pool,password);
+        handleType(request.isIncludeUpperCase(), CommonConstants.UPPERCASE,pool,password);
+        handleType(request.isIncludeNumbers(), CommonConstants.NUMBERS,pool,password);
+        handleType(request.isIncludeSymbols(), CommonConstants.SYMBOLS,pool,password);
 
-        if (pool.length() == 0) {
-            throw new IllegalArgumentException("At least one character set must be selected");
-        }
 
         while(password.length() < length){
             password.append(getRandomChar(pool.toString()));
@@ -87,6 +83,22 @@ public class RandomPasswordGenerator implements PasswordGenerator<RandomPassword
 
         if (request.getLength() <= 0) {
             throw new IllegalArgumentException("Password length must be greater than 0");
+        }
+
+        int selectedCount = 0;
+        if (request.isIncludeLowerCase()) selectedCount++;
+        if (request.isIncludeUpperCase()) selectedCount++;
+        if (request.isIncludeNumbers()) selectedCount++;
+        if (request.isIncludeSymbols()) selectedCount++;
+
+        if (selectedCount == 0) {
+            throw new IllegalArgumentException("At least one character set must be selected");
+        }
+
+        if (request.getLength() < selectedCount) {
+            throw new IllegalArgumentException(
+                    "Password length must be at least " + selectedCount + " when using selected character sets"
+            );
         }
     }
 

@@ -8,6 +8,7 @@ public class MemorablePasswordRequest implements PasswordRequest {
     private boolean capitalizeWords;
     private boolean isIncludeSymbols;
     private boolean isIncludeNumbers;
+    private boolean isLeet;
     private String separator;
 
     @Override
@@ -54,4 +55,8 @@ public class MemorablePasswordRequest implements PasswordRequest {
     public void setSeparator(String separator) {
         this.separator = separator;
     }
+
+    public boolean isLeet() {return isLeet;}
+
+    public void setLeet(boolean leet) {isLeet = leet;}
 }

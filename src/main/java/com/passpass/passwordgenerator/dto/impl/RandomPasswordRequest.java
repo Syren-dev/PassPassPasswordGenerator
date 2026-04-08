@@ -4,7 +4,7 @@ import com.passpass.passwordgenerator.dto.PasswordRequest;
 
 public class RandomPasswordRequest implements PasswordRequest {
     private int length;
-    private boolean includeUpperCase;
+    private boolean isIncludeUpperCase;
     private boolean isIncludeLowerCase;
     private boolean isIncludeSymbols;
     private boolean isIncludeNumbers;
@@ -23,11 +23,11 @@ public class RandomPasswordRequest implements PasswordRequest {
     }
 
     public boolean isIncludeUpperCase() {
-        return includeUpperCase;
+        return isIncludeUpperCase;
     }
 
     public void setIncludeUpperCase(boolean includeUpperCase) {
-        this.includeUpperCase = includeUpperCase;
+        isIncludeUpperCase = includeUpperCase;
     }
 
     public boolean isIncludeLowerCase() {
