@@ -1,0 +1,66 @@
+/* ===== Containers ===== */
+
+.container {
+  width: min(100% - 48px, 1342px);
+  margin: 0 auto;
+}
+
+.section {
+  margin-top: 48px;
+}
+
+/* ===== Flex Layout Helpers ===== */
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+/* ===== Gap Helpers ===== */
+
+.gap-sm {
+  gap: var(--gap-sm);
+}
+
+.gap-md {
+  gap: var(--gap-md);
+}
+
+.gap-lg {
+  gap: var(--gap-lg);
+}
+
+/* ===== Width Helpers ===== */
+
+.w-full {
+  width: 100%;
+}
+
+/* ===== Responsive ===== */
+
+@media (max-width: 768px) {
+  .container {
+    width: min(100% - 32px, 1120px);
+  }
+
+  .section {
+    margin-top: 32px;
+  }
+}
